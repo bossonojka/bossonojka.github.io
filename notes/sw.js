@@ -2,10 +2,9 @@ self.addEventListener("install", function(e){
     e.waitUntil(
         caches.open('notes-store').then(function(cache){
             return cache.addAll([
-                '/notes',
-                '/notes/index.html',
-                '/notes/style.css',
-                '/notes/index-start.js'
+                'index.html',
+                'style.css',
+                'index-start.js'
             ]);
         })
     )
