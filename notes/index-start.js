@@ -215,7 +215,7 @@ function editItem(e){
     }
 
     if ('serviceWorker' in navigator){
-        navigator.serviceWorker.register('sw.js').then(function(){
+        navigator.serviceWorker.register('/notes/sw.js').then(function(){
             console.log('Service Worker Registered');
         })
     }

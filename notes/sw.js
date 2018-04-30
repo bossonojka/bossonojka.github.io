@@ -1,13 +1,14 @@
-self.addEventListener("install", function(e){
-    e.waitUntil(
-        caches.open('notes-store').then(function(cache){
-            return cache.addAll([
-                'index.html',
-                'style.css',
-                'index-start.js'
-            ]);
-        })
-    )
+self.addEventListener('install', function(e) {
+ e.waitUntil(
+   caches.open('video-store').then(function(cache) {
+     return cache.addAll([
+       '/notes/',
+       '/notes/index.html',
+       '/notes/style.css',
+       '/notes/sw.js'
+     ]);
+   })
+ );
 });
 self.addEventListener('fecth',function(e){
     console.log(e.request.url);
