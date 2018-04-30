@@ -50,11 +50,14 @@ window.onload = function(){
     form[1].onsubmit = editItem;
 
     setControlBtn();
+<<<<<<< HEAD
 
     if ('serviceWorker' in navigator){
         let request = navigator.serviceWorker.register('/notes/sw.js');
         Promise.all([request]).then(function(){console.log('Service Worker Registered')});
     }
+=======
+>>>>>>> parent of 9ed325a... Changed position in code of service worker
 }
 
 function setControlBtn(){
@@ -217,5 +220,11 @@ function editItem(e){
         sectionEdit.hidden = true;
         
         displayData();
+    }
+
+    if ('serviceWorker' in navigator){
+        navigator.serviceWorker.register('/notes/sw.js').then(function(){
+            console.log('Service Worker Registered');
+        })
     }
 }
