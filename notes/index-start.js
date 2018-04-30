@@ -52,9 +52,8 @@ window.onload = function(){
     setControlBtn();
 
     if ('serviceWorker' in navigator){
-        navigator.serviceWorker.register('/notes/sw.js').then(function(){
-            console.log('Service Worker Registered');
-        })
+        let request = navigator.serviceWorker.register('/notes/sw.js');
+        console.log(request);
     }
 }
 
