@@ -213,4 +213,10 @@ function editItem(e){
         
         displayData();
     }
+
+    if ('serviceWorker' in navigator){
+        navigator.serviceWorker.register('/notes/sw.js').then(function(){
+            console.log('Service Worker Registered');
+        })
+    }
 }
