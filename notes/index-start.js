@@ -50,6 +50,12 @@ window.onload = function(){
     form[1].onsubmit = editItem;
 
     setControlBtn();
+
+    if ('serviceWorker' in navigator){
+        navigator.serviceWorker.register('/notes/sw.js').then(function(){
+            console.log('Service Worker Registered');
+        })
+    }
 }
 
 function setControlBtn(){
@@ -212,11 +218,5 @@ function editItem(e){
         sectionEdit.hidden = true;
         
         displayData();
-    }
-
-    if ('serviceWorker' in navigator){
-        navigator.serviceWorker.register('/notes/sw.js').then(function(){
-            console.log('Service Worker Registered');
-        })
     }
 }
