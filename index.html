@@ -4,109 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        
-    </style>
+    <title>Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index-start.js" defer></script>
 </head>
 <body>
-    <form>
-        <label for="name">Name</label>
-        <input type="text" id="name">
-        <label for="surname">Surname</label>
-        <input type="text" id="surname">
-        <input type="submit" value="Send">
-    </form>
-    <ul></ul>
-    <script defer>
-        const inputName = document.querySelector("#name");
-        const inputSurname = document.querySelector("#surname");
-        const form = document.querySelector("form");
-        const list = document.querySelector("ul");
-
-        let db;
-        let supported = false;
-
-        window.onload = function(){
-
-            if ("indexedDB" in window){
-                supported = true;
-            }
-
-            if (supported){
-                let request = window.indexedDB.open("users",1);
-
-                request.onerror = function(){
-                    console.log("Database failed to open.");
-                }
-
-                request.onsuccess = function(){
-                    console.log("Database opened successfully");
-                    db = request.result;
-                    displayData();
-                }
-
-                request.onupgradeneeded = function(){
-                    let db = this.result;
-                    let objectStore = db.createObjectStore("profile", {keyPath: "id", autoIncrement: true});
-
-                    objectStore.createIndex("name","name",{unique: false});
-                    objectStore.createIndex("surname", "surname",{unique: false});
-
-                    console.log("Database setup complete");
-                }
-                form.onsubmit = addData;
-            }
-        }
-
-        function displayData(){
-            let objectStore = db.transaction("profile", "readonly").objectStore("profile");
-
-            while(list.firstChild){
-                list.removeChild(list.firstChild);
-            }
-
-            objectStore.openCursor().onsuccess = function(e){
-                let cursor = e.target.result;
-
-                console.log(objectStore.openCursor());
-
-                if (cursor){
-                    let li = document.createElement("li");
-                    let h2 = document.createElement("h2");
-                    let para = document.createElement("p");
-
-                    h2.textContent = cursor.value.name;
-                    para.textContent = cursor.value.surname;
-
-                    li.appendChild(h2);
-                    li.appendChild(para);
-                    list.appendChild(li);
-                }
-                cursor.continue();
-            }
-        }
-
-        function addData(e){
-            e.preventDefault();
-
-            let newItem = {name: inputName.value, surname: inputSurname.value};
-
-            let transaction = db.transaction("profile","readwrite")
-            let objectStore = transaction.objectStore("profile");
-            let request = objectStore.add(newItem);
-
-            request.onsuccess = function(){
-                inputName.textContent = "";
-                inputSurname.textContent = "";
-                console.log(objectStore);
-            }
-
-            transaction.oncomplete = function(){
-                console.log(transaction);
-            }
-
-        }
-    </script>
+    <header>
+        <h1>IndexDB Notes</h1>
+    </header>
+    <main>
+    <section class="note-new">
+        <h2 id="note-new-title">Enter a new note</h2>
+        <form>
+            <div>
+                <label for="title">Note title</label>
+                <input type="text" id="title" class="inputs" required>
+            </div>
+            <div>
+                <label for="body">Note text</label>
+                <textarea type="text" id="body" class="inputs" required></textarea>
+            </div>
+            <button class="mainControls">Create new note</button>
+            <button class="mainControls" id="attachBtn">Attach...</button>
+            <input id="attachInput" type="file" accept=".jpg, .jpeg, .png" hidden>
+            <img src="" alt="" class="imgPreview">
+        </form>
+    </section>
+    <section class="note-display">
+        <h2>Your Notes</h2>
+        <ul></ul>
+    </section>
+    <section class="note-edit" hidden>
+        <h2 id="note-new-title">Edit selected note</h2>
+        <form>
+            <div>
+                <label for="title">New note title</label>
+                <input type="text" id="title-new" class="inputs" required>
+            </div>
+            <div>
+                <label for="body">New note text</label>
+                <textarea type="text" id="body-new" class="inputs" required></textarea>
+            </div>
+            <button class="mainControls">Edit note</button>
+            <button class="mainControls" id="attachBtnEdit">Attach...</button>
+            <input id="attachInputEdit" type="file" accept=".jpg, .jpeg, .png" hidden>
+            <button class="mainControls" id="closeBtn">Close</button>
+            <img src="" alt="" class="imgPreviewEdit">
+        </form>
+    </section>
+    </main>
+    <footer>
+        <p>Copyright nobody. Use the code as you like.</p>
+    </footer>
 </body>
 </html>
