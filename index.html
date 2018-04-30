@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <form>
+        <label for="name">Name</label>
+        <input type="text" id="name">
+        <label for="surname">Surname</label>
+        <input type="text" id="surname">
+        <input type="submit" value="Send">
+    </form>
+    <ul></ul>
+    <script defer>
+        const inputName = document.querySelector("#name");
+        const inputSurname = document.querySelector("#surname");
+        const form = document.querySelector("form");
+        const list = document.querySelector("ul");
+
+        let db;
+        let supported = false;
+
+        window.onload = function(){
+
+            if ("indexedDB" in window){
+                supported = true;
+            }
+
+            if (supported){
+                let request = window.indexedDB.open("users",1);
+
+                request.onerror = function(){
+                    console.log("Database failed to open.");
+                }
+
+                request.onsuccess = function(){
+                    console.log("Database opened successfully");
+                    db = request.result;
+                    displayData();
+                }
+
+                request.onupgradeneeded = function(){
+                    let db = this.result;
+                    let objectStore = db.createObjectStore("profile", {keyPath: "id", autoIncrement: true});
+
+                    objectStore.createIndex("name","name",{unique: false});
+                    objectStore.createIndex("surname", "surname",{unique: false});
+
+                    console.log("Database setup complete");
+                }
+                form.onsubmit = addData;
+            }
+        }
+
+        function displayData(){
+            let objectStore = db.transaction("profile", "readonly").objectStore("profile");
+
+            while(list.firstChild){
+                list.removeChild(list.firstChild);
+            }
+
+            objectStore.openCursor().onsuccess = function(e){
+                let cursor = e.target.result;
+
+                console.log(objectStore.openCursor());
+
+                if (cursor){
+                    let li = document.createElement("li");
+                    let h2 = document.createElement("h2");
+                    let para = document.createElement("p");
+
+                    h2.textContent = cursor.value.name;
+                    para.textContent = cursor.value.surname;
+
+                    li.appendChild(h2);
+                    li.appendChild(para);
+                    list.appendChild(li);
+                }
+                cursor.continue();
+            }
+        }
+
+        function addData(e){
+            e.preventDefault();
+
+            let newItem = {name: inputName.value, surname: inputSurname.value};
+
+            let transaction = db.transaction("profile","readwrite")
+            let objectStore = transaction.objectStore("profile");
+            let request = objectStore.add(newItem);
+
+            request.onsuccess = function(){
+                inputName.textContent = "";
+                inputSurname.textContent = "";
+                console.log(objectStore);
+            }
+
+            transaction.oncomplete = function(){
+                console.log(transaction);
+            }
+
+        }
+    </script>
+</body>
+</html>
