@@ -1,0 +1,96 @@
+html{
+    font-family: 'Courier New', Courier, monospace;
+}
+body{
+    margin: 0 auto;
+    max-width: 1024px;
+}
+header, footer{
+    background-color: indianred;
+    color: white;
+    padding: 0 20px;
+    line-height: 100px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+footer{
+    line-height: 50px;
+}
+h1{
+    margin: 0;
+}
+h2{
+    margin-bottom: 0;
+}
+.note-new, .note-display, .note-edit{
+    padding-left: 20px;
+}
+.note-new{
+    padding: 20px;
+    padding-top: 0px;
+    background-color: lightgray;
+    border: black 3px dotted;
+}
+.note-edit{
+    padding: 20px;
+    padding-top: 0px;
+    margin-top: 20px;
+    background-color: rgb(243, 243, 243);
+    border: black 3px dotted;
+}
+.note-display{
+    margin-top: 20px;
+    background-color: rgb(243, 243, 243);
+    border: black 2px dashed;
+    overflow: auto;
+    max-height: 500px;
+}
+div{
+   margin-bottom: 10px;
+}
+.mainControls{
+    margin: 0;
+    border: none;
+    background-color: indianred;
+    color: white;
+    font-size: 16px;
+    padding: 10px 15px 10px 15px;
+    cursor: pointer;
+}
+.secControls{
+    margin: 0;
+    border: none;
+    background-color: indianred;
+    color: white;
+    font-size: 16px;
+    padding: 2px 20px 2px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.secControls:first-of-type{
+    margin-left: 0;
+}
+.imgPreview, .imgPreviewEdit{
+    vertical-align: bottom;
+}
+.imgNote{
+    width: 50%;
+    display: block;
+    margin-bottom: 16px;
+}
+.inputs{
+    outline: none;
+}
+#title, #title-new{
+    display: block;
+    width: 25%;
+}
+#body, #body-new{
+    display: block;
+    width: 50%;
+    height: 100px;
+    max-width: 100%;
+    min-width: 25%;
+    max-height: 200px;
+    min-height: 50px;
+}
