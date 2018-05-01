@@ -1,15 +1,13 @@
 self.addEventListener('install', function(e) {
  e.waitUntil(
    caches.open('notes-store').then(function(cache) {
-     let setCashe = cache.addAll([
+     return cache.addAll([
        '/notes/',
        '/notes/index.html',
        '/notes/style.css',
        '/notes/index-start.js',
        '/notes/sw.js'
      ]);
-     console.log(setCashe);
-     return setCashe;
    })
  );
 });
