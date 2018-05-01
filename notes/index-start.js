@@ -54,7 +54,6 @@ window.onload = function(){
     if ('serviceWorker' in navigator){
         let request = navigator.serviceWorker.register('/notes/sw.js');
         Promise.all([request]).then(function(registration){
-            registration.update();
             console.log('Service Worker Registered. ' + request);
         });
     }
