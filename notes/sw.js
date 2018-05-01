@@ -5,6 +5,7 @@ self.addEventListener('install', function(e) {
        '/notes/',
        '/notes/index.html',
        '/notes/style.css',
+       '/notes/index-start.js',
        '/notes/sw.js'
      ]);
    })
