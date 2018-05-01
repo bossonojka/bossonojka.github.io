@@ -1,6 +1,6 @@
 self.addEventListener('install', function(e) {
  e.waitUntil(
-   caches.open('video-store').then(function(cache) {
+   caches.open('notes-store').then(function(cache) {
      return cache.addAll([
        '/notes/',
        '/notes/index.html',
@@ -11,6 +11,7 @@ self.addEventListener('install', function(e) {
  );
 });
 self.addEventListener('fecth',function(e){
+    console.log(e);
     console.log(e.request.url);
     e.respondWith(caches.match(e.request).then(function(response){
         return response || fetch(e.request);
