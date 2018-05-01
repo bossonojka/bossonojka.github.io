@@ -8,6 +8,7 @@ self.addEventListener('install', function(e) {
        '/notes/index-start.js',
        '/notes/sw.js'
      ]);
+     console.log(setCashe);
      return setCashe;
    })
  );
