@@ -1,5 +1,4 @@
 self.addEventListener('install',function(e){
-    console.log(e.target);
     e.waitUntil(
         caches.open('img-store').then(function(cache){
             console.log('Filling cache...');
