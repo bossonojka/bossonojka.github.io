@@ -11,7 +11,7 @@ function imgLoad(obj){
                 responseArr[0] = request.response;
                 responseArr[1] = obj;
                 resolve(responseArr);
-                console.log(request.response);
+                console.log(request.responseURL);
             } else {
                 reject(request.statusText);
             }
