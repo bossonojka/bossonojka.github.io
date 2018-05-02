@@ -15,6 +15,11 @@ self.addEventListener('fetch',function(e){
     console.log(e);
     console.log(e.request.url);
     e.respondWith(caches.match(e.request).then(function(response){
-        return response || fetch(e.request);
+        return response || fetch(e.request).then(function(response){
+          caches.open('notes-store').then(function(cache){
+            cache.put(e.request, response.clone());
+            return response;
+          })
+        });
     }))
 })
