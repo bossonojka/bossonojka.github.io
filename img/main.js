@@ -45,7 +45,7 @@ for (var i = 0; i < Gallery.images.length; i++){
 
 if ('serviceWorker' in navigator){
     navigator.serviceWorker.register('/img/sw.js').then(function(reg){
-        console.log('Registration succeeded. ' + reg);
+        console.log('Registration succeeded. ' + reg.scope);
     }).catch(function(error) {
         console.log('Registration failed with ' + error);
       });
