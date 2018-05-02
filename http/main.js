@@ -19,7 +19,7 @@ function showImg(url){
     }
 }
 
-let images = ['images/Nature_1','images/Nature_2','images/Nature_3'];
+let images = ['images/Nature_1.jpg','images/Nature_2.jpg','images/Nature_3.jpg'];
 
 for (var i = 0; i < images.lenght; i++){
     showImg(images[i]);
