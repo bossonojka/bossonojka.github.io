@@ -7,6 +7,9 @@ var Gallery = {images: [
         url: 'images/Nature_2.jpg',},
         {name  : 'River',
         alt : 'River',
-        url: 'images/Nature_3.jpg',}
+        url: 'images/Nature_3.jpg',},
+        {name  : 'Beach',
+        alt : 'Beach',
+        url: 'images/Nature_4.jpg',}
     ]
 }
