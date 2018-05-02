@@ -7,7 +7,7 @@ function showImg(url){
     xhr.onload = function(){
         if (xhr.status == 200){
             let img = new Image();
-            img.src = xhr.response;
+            img.src = URL.createObjectURL(xhr.response);
             document.body.appendChild(img);
         } else {
             console.log(xhr.statusText);
@@ -21,6 +21,7 @@ function showImg(url){
 
 let images = ['images/Nature_1.jpg','images/Nature_2.jpg','images/Nature_3.jpg'];
 
-for (var i = 0; i < images.lenght; i++){
+for (var i = 0; i < images.length; i++){
     showImg(images[i]);
 }
+
