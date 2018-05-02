@@ -8,6 +8,7 @@ self.addEventListener('install',function(){
                 '/img/main.css',
                 '/img/main.js',
                 '/img/gallery.js',
+                '/img/images/',
                 '/img/images/Nature_1.jpg',
                 '/img/images/Nature_2.jpg',
                 '/img/images/Nature_3.jpg'
