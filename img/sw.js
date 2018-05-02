@@ -20,7 +20,7 @@ self.addEventListener('fetch', function(e){
     e.respondWith(
         caches.match(e.request).then(function(response){
             console.log(response);
-            return new Response(response) || fetch(e.request) || caches.match('/img/index.html');
+            return response || fetch(e.request) || caches.match('/img/index.html');
         })
     );
 })
