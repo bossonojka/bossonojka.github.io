@@ -34,12 +34,16 @@ self.addEventListener('activate', function(e){
 self.addEventListener('fetch', function(event) {
     event.respondWith(
       caches.match(event.request).then(function(resp) {
-        return resp || fetch(event.request).then(function(response) {
-          return caches.open('v2').then(function(cache) {
-            cache.put(event.request, response.clone());
-            return response;
-          });  
-        });
+          if (resp){
+            return resp;
+          } else {
+            fetch(event.request).then(function(response) {
+                return caches.open('v2').then(function(cache) {
+                  cache.put(event.request, response.clone());
+                  return response;
+                });  
+              });
+          }
       })
     );
   });
