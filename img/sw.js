@@ -31,17 +31,15 @@ self.addEventListener('activate', function(e){
     );
 })
 
-self.addEventListener('fetch', function(e){
-    console.info("Fetch event...");
-
-    e.respondWith(
-        caches.match(e.request).then(function(resp){
-            return resp || fetch(e.request).then(function(response){
-                caches.open('v2').then(function(cache){
-                    cache.put(e.request, response.clone());
-                    return response;
-                })
-            });
-        })
+self.addEventListener('fetch', function(event) {
+    event.respondWith(
+      caches.match(event.request).then(function(resp) {
+        return resp || fetch(event.request).then(function(response) {
+          return caches.open('v2').then(function(cache) {
+            cache.put(event.request, response.clone());
+            return response;
+          });  
+        });
+      })
     );
-})
+  });
