@@ -37,7 +37,7 @@ self.addEventListener('fetch', function(e){
     e.respondWith(
         caches.match(e.request).then(function(response){
             return response || fetch(e.request).then(function(response){
-                caches.open('img-store').then(function(cache){
+                caches.open('v2').then(function(cache){
                     cache.put(e.request, response.clone());
                     return response;
                 })
