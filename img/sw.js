@@ -1,4 +1,5 @@
 self.addEventListener('install',function(e){
+    console.info("Install event...");
     e.waitUntil(
         caches.open('v2').then(function(cache){
             return cache.addAll([
@@ -14,6 +15,8 @@ self.addEventListener('install',function(e){
 });
 
 self.addEventListener('activate', function(e){
+    console.info("Activate event...");
+
     let trueCache = ['v2'];
 
     e.waitUntil(
@@ -29,6 +32,8 @@ self.addEventListener('activate', function(e){
 })
 
 self.addEventListener('fetch', function(e){
+    console.info("Fetch event...");
+
     e.respondWith(
         caches.match(e.request).then(function(response){
             return response || fetch(e.request).then(function(response){
