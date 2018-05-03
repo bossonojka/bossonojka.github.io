@@ -11,7 +11,6 @@ function imgLoad(obj){
                 responseArr[0] = request.response;
                 responseArr[1] = obj;
                 resolve(responseArr);
-                console.log(request.responseURL);
             } else {
                 reject(request.statusText);
             }
@@ -27,7 +26,7 @@ let section = document.querySelector('section');
 
 for (var i = 0; i < Gallery.images.length; i++){
     imgLoad(Gallery.images[i]).then(function(response){
-        let img = new Image();
+        let img = document.createElement('img');
         let figure = document.createElement('figure');
         let caption = document.createElement('caption')
 
@@ -45,8 +44,8 @@ for (var i = 0; i < Gallery.images.length; i++){
 
 if ('serviceWorker' in navigator){
     navigator.serviceWorker.register('/img/sw.js').then(function(reg){
-        console.log('Registration succeeded. ' + reg.scope);
+        console.info('Registration succeeded. ' + reg.scope);
     }).catch(function(error) {
-        console.log('Registration failed with ' + error);
+        console.error('Registration failed with ' + error);
       });
 }
