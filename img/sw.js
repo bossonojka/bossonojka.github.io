@@ -35,8 +35,8 @@ self.addEventListener('fetch', function(e){
     console.info("Fetch event...");
 
     e.respondWith(
-        caches.match(e.request).then(function(response){
-            return response || fetch(e.request).then(function(response){
+        caches.match(e.request).then(function(resp){
+            return resp || fetch(e.request).then(function(response){
                 caches.open('v2').then(function(cache){
                     cache.put(e.request, response.clone());
                     return response;
