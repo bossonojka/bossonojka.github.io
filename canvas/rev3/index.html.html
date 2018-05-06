@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+        margin: 0;
+        overflow: hidden;
+        background: #ccc;
+      }
+      .settings {
+        width: 225px;
+        height: 125%;
+        background: #ccc;
+        padding: 5px;
+      }
+      input[type="color"], button {
+        width: 90%;
+        margin: 0 auto;
+        display: block;
+      }
+      input[type="range"] {
+        width: 70%;
+      }
+       span {
+         position: relative;
+         bottom: 5px;
+       }
+    </style>
+</head>
+<body>
+    <div class="settings">
+        <div class="inputs">
+            <input type="color">
+            <input type="range" name="" id="" min="2" max="50" value="30" class="size"><span class="output">30</span>
+            <input type="range" name="" id="" min="1" max="2" value="1" class="shapeType"><span class="shape">Circle</span>
+        </div>
+        <button>Clear canvas</button>
+    </div>
+    <canvas></canvas>
+    <script>
+        var canvas = document.querySelector('canvas');
+        var width = canvas.width = window.innerWidth;
+        var height = canvas.height = window.innerHeight-85;
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'rgb(0,0,0)';
+        ctx.fillRect(0,0,width,height);
+        var colorPicker = document.querySelector('input[type="color"]');
+        var sizePicker = document.querySelector('.size');
+        var output = document.querySelector('.output');
+        var clearBtn = document.querySelector('button');
+        var shapeType = document.querySelector('.shapeType');
+        var shape = document.querySelector('.shape');
+
+        var curX, curY, pressed, type = "Circle";
+
+        sizePicker.oninput = function() {
+            output.textContent = sizePicker.value;
+        }
+
+        shapeType.oninput = function(){
+            if(shapeType.value === "1"){
+                shape.textContent = type = "Circle";
+            } else if(shapeType.value === "2"){
+                shape.textContent = type = "Square";
+            }
+        }
+
+        clearBtn.onclick = function(){
+            ctx.fillStyle = "black";
+            ctx.fillRect(0,0,width,height);
+        }
+
+        canvas.onmousemove = function (e){
+            curX = e.pageX;
+            curY = e.pageY;
+        }
+
+        canvas.onmousedown = function(){
+            pressed = true;
+        }
+
+        canvas.onmouseup = function(){
+            pressed = false;
+        }
+
+        function draw(){
+            ctx.fillStyle = colorPicker.value;
+            ctx.beginPath();
+            if (pressed && type === "Circle"){
+                ctx.arc(curX,curY-95,sizePicker.value,0,Math.PI * 2, false);
+            } else if (pressed && type === "Square"){
+                ctx.fillRect(curX,curY-100,sizePicker.value,sizePicker.value);
+            }
+            ctx.fill();
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    </script>
+</body>
+</html>
