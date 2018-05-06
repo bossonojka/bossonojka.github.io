@@ -97,6 +97,7 @@ function dragover(e){
 }
 
 function drop(e){
+    e.preventDefault();
     media.play();
 
     let dt = e.dataTransfer;
