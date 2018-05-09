@@ -52,10 +52,9 @@ window.onload = function(){
     setControlBtn();
 
     if ('serviceWorker' in navigator){
-        let request = navigator.serviceWorker.register('/notes/sw.js');
-        Promise.all([request]).then(function(registration){
-            console.log('Service Worker Registered. ' + registration);
-        });
+        navigator.serviceWorker.register('/notes/sw.js').then(function(){
+            console.log('Service Worker Registered');
+        })
     }
 }
 
@@ -219,11 +218,5 @@ function editItem(e){
         sectionEdit.hidden = true;
         
         displayData();
-    }
-
-    if ('serviceWorker' in navigator){
-        navigator.serviceWorker.register('/notes/sw.js').then(function(){
-            console.log('Service Worker Registered');
-        })
     }
 }
