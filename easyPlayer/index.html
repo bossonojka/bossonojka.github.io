@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        @font-face{
+            font-family: 'HeydingsControlsRegular';
+            src: url('fonts/heydings_controls-webfont.eot'), url('fonts/heydings_controls-webfont.woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        section{
+            width: 70%;
+            margin: 0 auto;
+        }
+        section:hover .timer, section:hover button, section:hover button::before{
+            height: 40px;
+            opacity: 1;
+        }
+        video{
+            background-color: antiquewhite;
+        }
+        button{
+            border: none;
+            flex: 1;
+            height: 5px;
+            transition: all 1s;
+        }
+        button::before{
+            font-family: 'HeydingsControlsRegular';
+            content: attr(data-icon);
+            font-size: 20px;
+            color: black;
+            opacity: 0;
+            transition: all 1s;
+        }
+        .controls{
+            display: flex;
+        }
+        .timer{
+            background-color: gray;
+            height: 5px;
+            width: 70%;
+            float: right;
+            flex: 7;
+            transition: all 1s;
+        }
+        .timeBar{
+            width: 0;
+            height: inherit;
+            background-color:greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <video width="100%">
+            <source src="Intro.mp4" type="audio/mp4">
+        </video>
+        <div class="controls">
+            <button data-icon="P" id="play"></button>
+            <button data-icon="S" id="stop"></button>
+            <div class="timer">
+                <div class="timeBar"></div>
+            </div>
+        </div>
+        
+    </section>
+    <script>
+        let timer = document.querySelector(".timer");
+        let timeBar = document.querySelector(".timeBar");
+        let video = document.querySelector("video");
+        let play = document.querySelector("#play");
+        let stop = document.querySelector("#stop");
+
+        video.addEventListener('timeupdate', setTimer);
+
+        function setTimer(){
+            if (video.currentTime == video.duration){
+                video.currentTime = 0;
+                video.pause();
+                play.setAttribute('data-icon', 'P');
+            }
+            timeBar.style.width = timer.clientWidth * (video.currentTime/video.duration) + "px";
+        }
+
+        timer.addEventListener('click', goTo);
+
+        function goTo(event){
+            let widthBar = event.pageX - timer.getBoundingClientRect().x ;
+            console.log(widthBar);
+            video.currentTime = (widthBar * video.duration) / timer.clientWidth;
+        }
+
+        play.addEventListener('click', toPlay);
+
+        function toPlay(){ 
+            if(video.paused){
+                video.play();
+                play.setAttribute('data-icon', 'u');
+            } else {
+                video.pause();
+                play.setAttribute('data-icon', 'P');
+            }
+            
+        }
+
+        stop.addEventListener('click', toStop);
+
+        function toStop(){
+            video.currentTime = 0;
+            video.pause();
+            play.setAttribute('data-icon', 'P');
+        }
+    </script>
+</body>
+</html>
