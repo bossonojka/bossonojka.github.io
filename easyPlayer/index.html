@@ -63,11 +63,11 @@
         <div class="controls">
             <button data-icon="P" id="play"></button>
             <button data-icon="S" id="stop"></button>
-            <button data-icon="M" id="mute"></button>
             <div class="timer">
                 <div class="timeBar"></div>
             </div>
         </div>
+        
     </section>
     <script>
         let timer = document.querySelector(".timer");
@@ -75,7 +75,6 @@
         let video = document.querySelector("video");
         let play = document.querySelector("#play");
         let stop = document.querySelector("#stop");
-        let mute = document.querySelector("#mute");
 
         video.addEventListener('timeupdate', setTimer);
 
