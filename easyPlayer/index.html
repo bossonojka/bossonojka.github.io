@@ -63,7 +63,7 @@
         <div class="controls">
             <button data-icon="P" id="play"></button>
             <button data-icon="S" id="stop"></button>
-            <button data-icon="M" id="mute"></button>
+            <button data-icon="Q" id="mute"></button>
             <div class="timer">
                 <div class="timeBar"></div>
             </div>
@@ -78,6 +78,18 @@
         let mute = document.querySelector("#mute");
 
         video.addEventListener('timeupdate', setTimer);
+        video.addEventListener('keypress', toPauseByKey);
+
+        function toPauseByKey(event){
+            console.log(event);
+            if (event.charCode === 32 && video.paused){
+                video.play();
+                play.setAttribute('data-icon', 'u');
+            } else if (event.charCode === 32 && video.played){
+                video.pause();
+                play.setAttribute('data-icon', 'P');
+            }
+        }
 
         function setTimer(){
             if (video.currentTime == video.duration){
