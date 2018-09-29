@@ -1,0 +1,53 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+}
+.dropbox{
+    position: relative;
+    margin: 0 auto;
+    border: 10px solid coral;
+    box-sizing: border-box;
+    overflow:auto;
+}
+.mainTitle{
+    text-align: center;
+    margin: 0 auto;
+    font-size: 30px;
+    width: 70%;
+    border: 10px solid coral;
+    border-top: none;
+    padding-top: 5px;
+}
+.uploadedFiles{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+img, video{
+    display: block;
+    margin: 10px;
+    border: 3px solid coral;
+    width: 200px;
+}
+.authorTitle{
+    text-align: center;
+    
+}
+.del, .mini{
+    display: inline;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    background-color: coral;
+    border: none;
+    color: white;
+    padding: 3px 15px;
+}
+#setCol{
+    display: block;
+    margin: 0 auto;
+    background-color: coral;
+    border: none;
+    color: white;
+    padding: 3px 15px;
+    width: 20%;
+}
