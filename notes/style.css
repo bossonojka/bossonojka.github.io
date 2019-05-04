@@ -23,7 +23,7 @@ h2{
     margin-bottom: 0;
 }
 .note-new, .note-display, .note-edit{
-    padding-left: 20px;
+    padding: 0px 20px 0px 20px;
 }
 .note-new{
     padding: 20px;
@@ -44,6 +44,10 @@ h2{
     border: black 2px dashed;
     overflow: auto;
     max-height: 500px;
+}
+.note-display ul h3 span{
+    float: right;
+    font-size: 14px;
 }
 div{
    margin-bottom: 10px;
@@ -70,7 +74,7 @@ div{
 .secControls:first-of-type{
     margin-left: 0;
 }
-.imgPreview, .imgPreviewEdit{
+.imgPreview, .imgPreviewEdit, .videoPreview, .videoPreviewEdit{
     vertical-align: bottom;
 }
 .imgNote{
